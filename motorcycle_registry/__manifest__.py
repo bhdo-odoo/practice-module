@@ -10,6 +10,9 @@
     'version' : '0.0.1',
     'category' : 'Kawiil/Custom Modules',
     'website' : 'https://github.com/kro-odoo/batch10-practice-module/tree/16.0-motorcycle-registry-bhdo',
+    "data": [
+        'security/ir.model.access.csv',
+    ],
     'application' : True,
     'installable' : True,
     'license' : 'LGPL-3'
