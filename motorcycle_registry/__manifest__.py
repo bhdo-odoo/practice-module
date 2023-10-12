@@ -10,8 +10,13 @@
     'version' : '0.0.1',
     'category' : 'Kawiil/Custom Modules',
     'website' : 'https://github.com/kro-odoo/batch10-practice-module/tree/16.0-motorcycle-registry-bhdo',
+    "demo": [
+        'demo/demo_data.xml',
+    ],
     "data": [
         'security/ir.model.access.csv',
+        'views/motorcycle_registry.xml',
+        'views/motorcycle_registry_menus.xml',
     ],
     'application' : True,
     'installable' : True,
