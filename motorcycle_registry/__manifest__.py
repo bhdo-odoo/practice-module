@@ -15,7 +15,8 @@
     ],
     "data": [
         'security/ir.model.access.csv',
-        'views/motorcycle_registry.xml',
+        'views/motorcycle_registry_views.xml',
+        'data/motorcycle_registry_data.xml',
         'views/motorcycle_registry_menus.xml',
     ],
     'application' : True,

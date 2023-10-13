@@ -1,4 +1,6 @@
 from odoo import api, fields, models
+import re
+from odoo.exceptions import UserError
 
 class motorcycle_registry(models.Model):
     _name ="motorcycle.registry"
@@ -11,10 +13,32 @@ class motorcycle_registry(models.Model):
     first_name = fields.Char(string="First Name", required=True)
     last_name = fields.Char(string="Last Name", required=True)
     license_plate = fields.Char(string="License Plate") 
-    registry_number = fields.Char(string="Registry Number", required=True)    
+    registry_number = fields.Char(string="Registry Number", required=True)
     vehicle_image = fields.Image(string="Vehicle Image")
     vin = fields.Char(string="Vin", required=True)
     
+    _sql_constraints = [('vin_unique', 'UNIQUE(vin)', 'VIN number cannot be same for different vehicles')]
+    
+    @api.model
+    def create(self, vals):
+        vals['registry_number'] = self.env['ir.sequence'].next_by_code('motorcycle.registry.sequence')
+        return super(motorcycle_registry, self).create(vals)
+    
+    @api.constrains('vin')
+    def check_valid_vin(self) :
+        pattern = '^[A-Z]{4}\d{2}[A-Z0-9]{2}\d{5}$'
+        if not re.match(pattern, self.vin) :
+            raise UserError("The VIN Number should follow the following Pattern: Make - 2 capital letters, Model - 2 capital letters, Year - 2 digits, Battery Capacity - 2 capital letters or numbers, Serial Number - 5 digits")
+    
+    @api.constrains('license_plate')
+    def _check_license_plate_pattern(self):
+        pattern = '^[A-Z]{1,4}\d{1,3}[A-Z]{0,2}$'
+        for record in self:
+            license_plate = record.license_plate
+            if license_plate:
+                if not re.match(pattern, license_plate):
+                    raise UserError("Invalid License Plate Number. It should follow the pattern: 1-4 Letters, 1-3 Digits, Optional 2 Letters. Eg: KLV453 or KLR343L")
+
 # TASK-5
     # Create one record from the Motorcycle Registry Model. This Registry should have more than 1000 miles and no license plate.
         # env['motorcycle.registry'].create({'current_mileage': 1200, 'first_name': 'Jim', 'last_name': 'Smith', 'registry_number': 'D123', 'vin': 'vin4', 'license_plate': False})
