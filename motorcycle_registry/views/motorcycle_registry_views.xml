@@ -17,8 +17,9 @@
                             <field name="license_plate"/>
                         </group>
                         <group string="OWNER INFORMATION">
-                            <field name="first_name"/>
-                            <field name="last_name"/>
+                            <field name="owner_id"/>
+                            <field name="phone"/>
+                            <field name="email"/>
                         </group>  
                     </group>
                     <notebook>
@@ -39,10 +40,10 @@
         <field name="arch" type="xml">
             <tree string="Registry">
             <field name="registry_number"/>
-            <field name="vin"/>
+            <field name="make"/>
+            <field name="model"/>
             <field name="license_plate"/>
-            <field name="first_name"/>
-            <field name="last_name"/>
+            <field name="owner_id"/>
             </tree>
         </field>
     </record>
@@ -54,20 +55,20 @@
             <search string="Registry">
                 <field name="registry_number"/>
                 <field name="vin"/>
-                <field name="last_name"/>
                 <field name="license_plate"/>
                 <field name="date_registry"/>
-                <filter name="filter_date_registry" date="date_registry" string="Registration Date"/>
-                <filter name="groupby_date_registry" string="Registration Date"/>                    
+                <filter string="Date Registry" name="date_registry" domain="[('date_registry','!=',False)]"/>
+                <group string="Group By">
+                    <filter string="Date Registry" name="date_registry1" context="{'group_by':'date_registry'}"/>
+                </group>              
             </search>        
         </field>
     </record>
     
-    
+
     <record id="action_motorcycle_registry" model="ir.actions.act_window">
         <field name="name">Motorcycle Registry</field>
         <field name="res_model">motorcycle.registry</field>
-        <field name="view_mode">tree,form</field>
+        <!-- <field name="context">{'search_default_date_registry': True}</field> -->
     </record>
-
 </odoo>

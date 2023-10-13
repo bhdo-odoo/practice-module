@@ -10,8 +10,6 @@ class motorcycle_registry(models.Model):
     certificate_title = fields.Binary(string="Certificate Title")
     current_mileage = fields.Float(string="Current Mileage")
     date_registry = fields.Date(string="Date Registry")
-    first_name = fields.Char(string="First Name", required=True)
-    last_name = fields.Char(string="Last Name", required=True)
     license_plate = fields.Char(string="License Plate") 
     registry_number = fields.Char(string="Registry Number", required=True)
     vehicle_image = fields.Image(string="Vehicle Image")
@@ -38,7 +36,43 @@ class motorcycle_registry(models.Model):
             if license_plate:
                 if not re.match(pattern, license_plate):
                     raise UserError("Invalid License Plate Number. It should follow the pattern: 1-4 Letters, 1-3 Digits, Optional 2 Letters. Eg: KLV453 or KLR343L")
+                
+    owner_id = fields.Many2one('res.partner', string="Owner")
+    email = fields.Char(string="Email", related="owner_id.email")
+    phone = fields.Char(string="Phone", related="owner_id.phone")
+    
+    make = fields.Char(string="Make", compute='_compute_make', store=True)
+    model = fields.Char(string="Model", compute='_compute_model', store=True)
+    year = fields.Char(string="Year", compute='_compute_year', store=True)
 
+    @api.depends('vin')
+    def _compute_make(self):
+        for record in self:
+            vin = record.vin
+            if vin:
+                record.make = vin[0:2]
+            else:
+                record.make = ""
+
+    @api.depends('vin')
+    def _compute_model(self):
+        for record in self:
+            vin = record.vin
+            if vin:
+                record.model = vin[2:4]
+            else:
+                record.model = ""
+
+    @api.depends('vin')
+    def _compute_year(self):
+        for record in self:
+            vin = record.vin
+            if vin:
+                record.year = vin[4:6]
+            else:
+                record.year = ""
+    
+    
 # TASK-5
     # Create one record from the Motorcycle Registry Model. This Registry should have more than 1000 miles and no license plate.
         # env['motorcycle.registry'].create({'current_mileage': 1200, 'first_name': 'Jim', 'last_name': 'Smith', 'registry_number': 'D123', 'vin': 'vin4', 'license_plate': False})
