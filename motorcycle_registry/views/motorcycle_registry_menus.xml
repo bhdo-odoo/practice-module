@@ -16,5 +16,5 @@
         parent="menu_motorcycle_registry_submenu"
         action="action_motorcycle_registry"
         sequence="11"/>
-    
+
 </odoo>

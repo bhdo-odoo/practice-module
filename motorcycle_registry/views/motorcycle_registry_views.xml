@@ -71,4 +71,5 @@
         <field name="res_model">motorcycle.registry</field>
         <!-- <field name="context">{'search_default_date_registry': True}</field> -->
     </record>
+
 </odoo>
