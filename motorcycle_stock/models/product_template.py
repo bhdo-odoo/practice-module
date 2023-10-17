@@ -20,3 +20,4 @@ class ProductTemplateInherit(models.Model):
     make = fields.Char(string='Make')
     model = fields.Char(string='Model')
     year = fields.Char(string='Year')
+    launch_date = fields.Date(string='Launch Date')
