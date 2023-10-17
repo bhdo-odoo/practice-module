@@ -2,7 +2,7 @@ from odoo import api, fields, models
 import re
 from odoo.exceptions import UserError
 
-class motorcycle_registry(models.Model):
+class MotorcycleRegistry(models.Model):
     _name ="motorcycle.registry"
     _description ="Motorcycle Registry"
     _rec_name = "registry_number"
@@ -20,7 +20,7 @@ class motorcycle_registry(models.Model):
     @api.model
     def create(self, vals):
         vals['registry_number'] = self.env['ir.sequence'].next_by_code('motorcycle.registry.sequence')
-        return super(motorcycle_registry, self).create(vals)
+        return super(MotorcycleRegistry, self).create(vals)
 
     @api.constrains('vin')
     def check_valid_vin(self) :
