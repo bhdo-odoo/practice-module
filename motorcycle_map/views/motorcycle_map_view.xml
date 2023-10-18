@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- <record id="res_partner_view_motorcycle_map" model="ir.ui.view">
+    <record id="res_partner_view_motorcycle_map" model="ir.ui.view">
         <field name="name">res.partner.view.map</field>
         <field name="model">res.partner</field>
         <field name="arch" type="xml">
@@ -18,5 +18,5 @@
         <field name="view_mode">map</field>
         <field name="view_id" ref="res_partner_view_map"/>
         <field name="act_window_id" ref="contacts.action_contacts"/>
-    </record> -->
+    </record>
 </odoo>
