@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="compare_page_template" name="Compare Motorcycles">
+        <t t-call="website.layout">
+            <div class="oe_structure">
+                <div class="container">
+                    <br />
+                    <center>
+                        <h3>Motorcycle Comparison</h3>
+                    </center>
+                    <br />
+                    <table class="table-bordered table-striped-columns text-center table">
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold text-start">Specs</td>
+                                <t t-foreach="motorcycle_templates" t-as="motorcycle">
+                                    <td>
+                                        <span class="fw-bold" t-out="motorcycle.name"/>
+                                    </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td class="text-start">Image</td>
+                                <t t-foreach="motorcycle_templates" t-as="motorcycle">
+                                    <td>
+                                        <span t-out="motorcycle.name"/>
+                                    </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td class="text-start">Launch Date:</td>
+                                <t t-foreach="motorcycle_templates" t-as="motorcycle">
+                                    <td>
+                                        <span t-out="motorcycle.launch_date"/>
+                                    </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td class="text-start">Range:</td>
+                                <t t-foreach="motorcycle_templates" t-as="motorcycle">
+                                    <td>
+                                        <span t-out="motorcycle.range"/>
+                                    </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td class="text-start">Torque:</td>
+                                <t t-foreach="motorcycle_templates" t-as="motorcycle">
+                                    <td>
+                                        <span t-out="motorcycle.torque"/>
+                                    </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td class="text-start">Top Speed:</td>
+                                <t t-foreach="motorcycle_templates" t-as="motorcycle">
+                                    <td>
+                                        <span t-out="motorcycle.top_speed"/>
+                                    </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td class="text-start">Battery Capacity:</td>
+                                <t t-foreach="motorcycle_templates" t-as="motorcycle">
+                                    <td>
+                                        <span t-out="motorcycle.battery_capacity"/>
+                                    </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td class="text-start">Charge Time:</td>
+                                <t t-foreach="motorcycle_templates" t-as="motorcycle">
+                                    <td>
+                                        <span t-out="motorcycle.charge_time"/>
+                                    </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td class="text-start">Curb weight:</td>
+                                <t t-foreach="motorcycle_templates" t-as="motorcycle">
+                                    <td>
+                                        <span t-out="motorcycle.curb_weight"/>
+                                    </td>
+                                </t>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

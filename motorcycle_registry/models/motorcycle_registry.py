@@ -72,7 +72,6 @@ class MotorcycleRegistry(models.Model):
             else:
                 record.year = ""
 
-
 # TASK-5
     # Create one record from the Motorcycle Registry Model. This Registry should have more than 1000 miles and no license plate.
         # env['motorcycle.registry'].create({'current_mileage': 1200, 'first_name': 'Jim', 'last_name': 'Smith', 'registry_number': 'D123', 'vin': 'vin4', 'license_plate': False})
