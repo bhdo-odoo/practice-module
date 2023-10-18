@@ -17,6 +17,6 @@
     "installable": True,
     'license': 'LGPL-3',
     "data": [
-        'views/motorcycle_map_view.xml',
+        'views/motorcycle_map_views.xml',
     ],
 }
