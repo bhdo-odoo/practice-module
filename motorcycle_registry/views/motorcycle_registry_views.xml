@@ -69,8 +69,8 @@
     <record id="action_motorcycle_registry" model="ir.actions.act_window">
         <field name="name">Motorcycle Registry</field>
         <field name="res_model">motorcycle.registry</field>
-        <field name="view_mode">map,tree,form</field>
-        <!-- <field name="context">{'search_default_date_registry': True}</field> -->
+        <field name="view_mode">map,tree,form,search</field>
+        <field name="context">{'search_default_date_registry': True}</field>
     </record>
 
 </odoo>
