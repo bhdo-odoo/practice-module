@@ -1,11 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
-
         <record id="sequence_motorcycle_registry" model="ir.sequence">
             <field name="name">motorcycle registry sequence</field>
             <field name="code">motorcycle.registry.sequence</field>
             <field name="prefix">MRN</field>
             <field name="padding">4</field>
         </record>
-
 </odoo>

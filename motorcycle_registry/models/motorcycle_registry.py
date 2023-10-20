@@ -36,7 +36,7 @@ class MotorcycleRegistry(models.Model):
             if license_plate:
                 if not re.match(pattern, license_plate):
                     raise UserError("Invalid License Plate Number. It should follow the pattern: 1-4 Letters, 1-3 Digits, Optional 2 Letters. Eg: KLV453 or KLR343L")
-                
+
     owner_id = fields.Many2one('res.partner', string="Owner")
     email = fields.Char(string="Email", related="owner_id.email")
     phone = fields.Char(string="Phone", related="owner_id.phone")

@@ -9,11 +9,11 @@ class ProductTemplateInherit(models.Model):
         type_mapping = super()._detailed_type_mapping()
         type_mapping['motorcycle'] = 'product'
         return type_mapping
-    
+
     horsepower = fields.Float(string='Horsepower')
     top_speed = fields.Float(string='Top Speed')
     torque = fields.Float(string='Torque')
-    battery_capacity = fields.Selection([('xs', 'Small'), ('0m', 'Medium'), ('0l', 'Long'), ('xl', 'Extra Large')], string='Battery Capacity')
+    battery_capacity = fields.Selection([('xs', 'Small'), ('0m', 'Medium'), ('0l', 'Large'), ('xl', 'Extra Large')], string='Battery Capacity')
     charge_time = fields.Float(string='Charge Time')
     range = fields.Float(string='Range')
     curb_weight = fields.Float(string='Curb Weight')
@@ -22,40 +22,28 @@ class ProductTemplateInherit(models.Model):
     year = fields.Char(string='Year')
     launch_date = fields.Date(string='Launch Date')
 
-    @api.model
-    def create(self, values):
-        if values.get('type') == 'product' and values.get('product_variant_count', 0) == 1:
-            product_variant = self.env['product.product'].create({
-                'year': values.get('year'),
-                'make': values.get('make'),
-                'model': values.get('model'),
-                'detailed_type': values.get('detailed_type'),
-            })
-            if product_variant.detailed_type == 'motorcycle':
-                values['name'] = f"{product_variant.year} {product_variant.make} {product_variant.model}"
+    name = fields.Char(compute='_compute_name_product', store=True, readonly=False)
 
-        product_template = super(ProductTemplateInherit, self).create(values)
-
-        return product_template
+    @api.depends('detailed_type', 'make', 'model', 'year')
+    def _compute_name_product(self):
+        for product in self:
+            if product.detailed_type == 'motorcycle':
+                name_parts = [part for part in [product.year, product.make, product.model] if part]
+                product.name = ' '.join(name_parts)
+            else:
+                product.name = super(ProductTemplateInherit, product).name
 
 
+class StockLotInherit(models.Model):
+    _inherit = 'stock.lot'
 
-    # @api.depends('name', 'make', 'model', 'year', 'detailed_type')
-    # def _compute_motorcycle_name(self):
-    #     for template in self: 
-    #         if template.type == 'product' and template.product_variant_count == 1:
-    #             variant = template.product_variant_ids
-    #             if variant.detailed_type == 'motorcycle':
-    #                 template.name = f"{variant.year}{variant.make}{variant.model}"
-    #             else:
-    #                 template.name = template.name
-    #         else:
-    #             template.name = template.name
-        # for template in self:
-        #     variant = template.product_variant_ids
-        #     if variant.detailed_type != 'motorcycle':
-        #         return variant.name
-        #     elif variant.detailed_type == 'motorcycle':
-        #             template.name = f"{variant.make}{variant.model}{variant.year}"
-        #     else:
-        #         template.name = ""
+    name = fields.Char(compute='_compute_name_lot', store=True, readonly=False)
+
+    @api.depends('product_id.product_tmpl_id.detailed_type', 'product_id.product_tmpl_id.year', 'product_id.product_tmpl_id.make', 'product_id.product_tmpl_id.model', 'product_id.product_tmpl_id.battery_capacity', 'name')
+    def _compute_name_lot(self):
+        for lot in self:
+            if lot.product_id.product_tmpl_id.detailed_type == 'motorcycle':
+                name_parts = [part for part in [lot.product_id.product_tmpl_id.year, lot.product_id.product_tmpl_id.make, lot.product_id.product_tmpl_id.model, lot.product_id.product_tmpl_id.battery_capacity] if part]
+                lot.name = ''.join(name_parts)
+            else:
+                lot.name = lot.name

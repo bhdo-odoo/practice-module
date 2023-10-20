@@ -4,19 +4,18 @@
         <field name="registry_number">MRN0001</field>
         <field name="vin">KAIN21SS00001</field>
     </record>
-    
+
     <record id="rec2" model="motorcycle.registry">
         <field name="current_mileage">5250</field>
         <field name="date_registry">2023-01-27</field>
         <field name="registry_number">MRN0002</field>
         <field name="vin">KAUS22MM00002</field>
     </record>
-    
+
     <record id="rec3" model="motorcycle.registry">
         <field name="current_mileage">23250</field>
         <field name="date_registry" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d')"/>
         <field name="registry_number">MRN0003</field>
         <field name="vin">KABE23LL00003</field>
     </record>
-
 </odoo>

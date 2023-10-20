@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="discount_pricelist_id" model="product.pricelist">
+        <field name="name">Electric Motorcycle Discount</field>
+        <field name="discount_policy">without_discount</field>
+        <field name="item_ids" eval="[(0, 0, {'applied_on': '3_global', 'compute_price': 'fixed', 'fixed_price': -2500})]"/>
+    </record>
+
+    <record id="view_sale_order_form_inherited" model="ir.ui.view">
+        <field name="name">sale.order.form.inherited</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <button name="action_apply_discount" string="Apply Discount" states="draft" type="object" groups="your_module.group_sale_user" groups="base.group_sale_manager"/>
+        </field>
+    </record>
+
+</odoo>

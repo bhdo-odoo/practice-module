@@ -33,70 +33,22 @@
         </field>
     </record>
 
-    <!-- <record id="action_product_template_filter" model="ir.filters">
-        <field name="name">Motorcycle Products</field>
-        <field name="model_id">product.template</field>
-        <field name="domain">[('detailed_type', '=', 'motorcycle')]</field>
-        <field name="context">{'group_by': 'detailed_type'}</field>
-    </record> -->
-    
-    <!-- <record id="action_product_template_inherit" model="ir.actions.act_window">
-        <field name="name">Products</field>
-        <field name="res_model">product.template</field>
-        <field name="view_mode">tree,form</field>
-        <field name="context">{'search_default_filter_motorcycle': 1}</field>
-        <field name="domain">[('detailed_type', '=', 'motorcycle')]</field>
-    </record> -->
-    
-    <!-- <record id="product_menu_product" model="ir.ui.menu">
-        <field name="action" ref="motorcycle_stock.action_product_template_inherit"/>
-    </record> -->
-
-    <!-- <record id="menu_product" model="ir.ui.menu">
-        <field name="name">Products</field>
-        <field name="action" ref="product.product_template_action" />
-    </record> -->
-
-    <!-- <record id="product_template_inherit_view" model="ir.ui.view">
-        <field name="name">product.template.product_template_inherit</field>
+    <record id="view_product_template_search_inherit" model="ir.ui.view">
+        <field name="name">product.template.search.inherit</field>
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
         <field name="arch" type="xml">
-            <xpath expr="//tree" position="attributes">
-                <attribute name="create">false</attribute>
-            </xpath>
-            <xpath expr="//tree[@string='Products']" position="after">
-                <tree string="Motorcycle Products" colors="red: detailed_type == 'motorcycle'">
-                    <field name="name"/>
-                </tree>
-            </xpath>
-        </field>
-    </record> -->
-
-    <!-- <record id="action_product_template_search" model="ir.ui.view">
-        <field name="name">Product Template</field>
-        <field name="model">product.product</field>
-        <field name="inherit_id" ref="product.product_category_search_view"/>
-        <field name="arch" type="xml">
-            <search string="Motorcycle">
-                <xpath expr="//field[@name='detailed_type']" position="after">
-                    <filter string="Motorcycle" domain="[('detailed_type', '=', 'motorcycle')]"/>
-                </xpath>
+            <xpath expr="//filter[@name='consumable']" position="after">
                 <separator/>
-                <field name="detailed_type" filter_domain="[('detailed_type', '=', 'motorcycle')]"/>
-                <filter string="detailed_type" name="Detailed Type" domain="[('detailed_type', '=', 'motorcycle')]"/>
-                    <group expand="1" string="Group By">
-                        <filter string="Detailed Type" name="Detailed Type" context="{'group_by':'detailed_type'}"/>
-                    </group>
-            </search>        
+                <filter string="Motorcycle Products" name="motorcycles" domain="[('detailed_type', '=', 'motorcycle')]" context="{'search_default_motorcycles': 1, 'default_detailed_type': 'motorcycle'}"/>
+            </xpath>
         </field>
-    </record> -->
+    </record>   
 
-    <!-- <record id="action_product_template" model="ir.actions.act_window">
-        <field name="name">Product Template</field>
+    <record id="sale.product_template_action" model="ir.actions.act_window">
+        <field name="name">Products</field>
         <field name="res_model">product.template</field>
-        <field name="view_mode">search</field>
-        <field name="context">{'search_default_detailed_type': True}</field>
-    </record> -->
-
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'search_default_motorcycles': 1}</field>
+    </record>
 </odoo>
