@@ -23,7 +23,8 @@
                                 <td class="text-start">Image</td>
                                 <t t-foreach="motorcycle_templates" t-as="motorcycle">
                                     <td>
-                                        <img t-attf-src="data:image/png;base64,#{motorcycle.image_1920}" align='center' style="height: 100px;" widget="image"/>
+                                        <img t-attf-src="data:image/png;base64,#{motorcycle.image_1920}" 
+                                            align='center' style="height: 100px;" widget="image"/>
                                     </td>
                                 </t>
                             </tr>

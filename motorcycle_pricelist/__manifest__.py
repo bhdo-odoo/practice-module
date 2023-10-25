@@ -11,12 +11,15 @@
     'category' : 'Kawiil/Custom Modules',
     'website' : 'https://github.com/kro-odoo/batch10-practice-module/tree/16.0-motorcycle-registry-bhdo',
     
-    "depends": ["stock", "product"],
+    "depends": ["stock", "product", "sale_management"],
     "application": True,
     "auto_install": True,
     "installable": True,
     'license': 'LGPL-3',
     "data": [
         'views/product_pricelist.xml',
+    ],
+    "demo": [
+        'demo/pricelist_demo.xml',
     ],
 }

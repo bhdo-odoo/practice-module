@@ -17,11 +17,6 @@ class MotorcycleRegistry(models.Model):
 
     _sql_constraints = [('vin_unique', 'UNIQUE(vin)', 'VIN number cannot be same for different vehicles')]
 
-    @api.model
-    def create(self, vals):
-        vals['registry_number'] = self.env['ir.sequence'].next_by_code('motorcycle.registry.sequence')
-        return super(MotorcycleRegistry, self).create(vals)
-
     @api.constrains('vin')
     def check_valid_vin(self) :
         pattern = '^[A-Z]{4}\d{2}[A-Z0-9]{2}\d{5}$'

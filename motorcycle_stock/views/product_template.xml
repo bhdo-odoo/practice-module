@@ -40,7 +40,8 @@
         <field name="arch" type="xml">
             <xpath expr="//filter[@name='consumable']" position="after">
                 <separator/>
-                <filter string="Motorcycle Products" name="motorcycles" domain="[('detailed_type', '=', 'motorcycle')]" context="{'search_default_motorcycles': 1, 'default_detailed_type': 'motorcycle'}"/>
+                <filter string="Motorcycle Products" name="motorcycles" domain="[('detailed_type', '=', 'motorcycle')]" 
+                    context="{'search_default_motorcycles': 1, 'default_detailed_type': 'motorcycle'}"/>
             </xpath>
         </field>
     </record>   
