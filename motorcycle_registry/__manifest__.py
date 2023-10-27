@@ -14,6 +14,7 @@
         'demo/demo_data.xml',
     ],
     "data": [
+        'security/security.xml',
         'security/ir.model.access.csv',
         'views/motorcycle_registry_views.xml',
         'data/motorcycle_registry_data.xml',
